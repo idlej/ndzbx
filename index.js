@@ -54,9 +54,11 @@ class ZabbixApi {
   }
 
   async login(usr, pwd) {
+    const user = usr || this.usr;
+    const password = pwd || this.pwd;
     const params = {
-      user: user || this.usr,
-      password: pwd || this.pwd,
+      user,
+      password,
     };
     this.auth = await this.request('user.login', params);
   }
