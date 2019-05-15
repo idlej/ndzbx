@@ -12,13 +12,13 @@ class ZabbixApi {
       this.axios = axios.create({
         baseURL: `https://${host}:${port}/api_jsonrpc.php`,
         httpsAgent: new https.Agent({
-          rejectUnauthorized: false
-        })
+          rejectUnauthorized: false,
+        }),
       });
     } else {
       port = port || 80;
       this.axios = axios.create({
-        baseURL: `http://${host}:${port}/api_jsonrpc.php`
+        baseURL: `http://${host}:${port}/api_jsonrpc.php`,
       });
     }
     this.auth = '';
@@ -27,23 +27,23 @@ class ZabbixApi {
 
   async request(method, params) {
     params = params || {};
-    let data = {
+    const data = {
       jsonrpc: '2.0',
       method,
       params,
-      id: this.id
-    }
+      id: this.id,
+    };
     this.id += 1;
     if (this.auth && method != 'apiinfo.version' && method != 'user.login') {
       data.auth = this.auth;
     }
-    let response = await this.axios.post('', data);
+    const response = await this.axios.post('', data);
     if (response.status != 200) {
       throw `Received response with error: ${response.status}`;
     }
-    let responseData = response.data;
+    const responseData = response.data;
     if ('error' in responseData) {
-      let error = responseData.error;
+      const error = responseData.error;
       if (['Session terminated, re-login, please.', 'Not authorised.'].includes(error.data)) {
         await this.login();
         return await this.request(method, params);
@@ -53,10 +53,10 @@ class ZabbixApi {
     return responseData.result;
   }
 
-  async login() {
-    let params = {
-      user: this.usr,
-      password: this.pwd
+  async login(usr, pwd) {
+    const params = {
+      user: user || this.usr,
+      password: pwd || this.pwd,
     };
     this.auth = await this.request('user.login', params);
   }
