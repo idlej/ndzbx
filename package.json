@@ -1,0 +1,31 @@
+{
+  "name": "ndzbx",
+  "version": "1.0.0",
+  "description": "nodejs zabbix api client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idlej/ndzbx.git"
+  },
+  "keywords": [
+    "nodejs",
+    "zabbix",
+    "json",
+    "api"
+  ],
+  "author": "idlej (muxiatianzhong@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/idlej/ndzbx/issues"
+  },
+  "homepage": "https://github.com/idlej/ndzbx#readme",
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}
